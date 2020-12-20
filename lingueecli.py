@@ -73,7 +73,7 @@ def translate(word, origin, dest):
             print(match_and_translation)
 
         if(number_of_exact_matches_found > 0): #And offer a link for more info
-            find_more_url = FIND_MORE_BASE_URL + origin + " " + dest + "/search?source=auto&query=" + word
+            find_more_url = FIND_MORE_BASE_URL + origin + "-" + dest + "/search?source=auto&query=" + word
             print("Find more at " + find_more_url)
 
     else: #If linguee returns an error

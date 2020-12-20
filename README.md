@@ -24,7 +24,7 @@ And you will hopefully get the following response:
 Translating... *beep boop bap*
 1 exact matches and translations found
 Sehenswürdigkeit: sight attraction place of interest point of interest object of interest showplace 
-Find more at https://www.linguee.com/de en/search?source=auto&query=sehenswürdigkeit
+Find more at https://www.linguee.com/de-en/search?source=auto&query=sehenswürdigkeit
 ```
 
 You can get help by typing
