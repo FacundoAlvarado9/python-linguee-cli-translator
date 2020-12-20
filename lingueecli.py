@@ -90,13 +90,13 @@ def translate(word, origin, dest):
 
 #Main program
 
-supported_langs_list = ""
+supported_langs_list_str = ""
 for supported_lang in codes_of_supported_langs.keys():
-    supported_langs_list += supported_lang.capitalize() + ", "
+    supported_langs_list_str += supported_lang.capitalize() + ", "
 
 parser = argparse.ArgumentParser(
         description="Translate a word from one language to another using the Linguee API",
-        epilog="Supported languages: " + supported_langs_list) #We create an argument parser in order to work with arguments from terminal
+        epilog="Supported languages: " + supported_langs_list_str) #We create an argument parser in order to work with arguments from terminal
 
 #Help for the user
 parser.add_argument("word", type=str, help="Word you want to translate")
@@ -113,3 +113,5 @@ dest_lang_code = get_language_two_letter_code(args.dest)
 if((origin_lang_code != None) & (dest_lang_code != None)): #If we found the 2-letter code for both langs
     #We call the Translate method with the arguments
     translate(args.word, origin_lang_code, dest_lang_code)
+else:
+    print("Oops! Seems like you added invalid languages! Check supported languages using --help")
