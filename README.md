@@ -1,4 +1,4 @@
-# Python Linguee CLI Translator
+# Python Linguee (Not official) CLI Translator
 This is just a single-word translator, made using the Linguee API, more info about that in https://github.com/imankulov/linguee-api/
 
 All credits for translations goes to Linguee. Amazing tool for language learning.
