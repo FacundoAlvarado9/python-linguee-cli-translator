@@ -42,13 +42,15 @@ def get_language_two_letter_code(full_name_of_language):
     #And of course, return it
     return two_letter_code
 
-def translate(word, origin, dest):
+def get_word_translation(word, origin, dest):
     api_url = '{0}q={1}&src={2}&dst={3}'.format(API_BASE_URL, word, origin, dest)
 
     results = [] #Saves the strings that show exact match and translation, of format: "Match: translation1, translation2..."
     number_of_exact_matches_found = 0
 
-    print("Translating... *beep boop bap*")
+    print("Translating... *beep boop bap* \n")
+
+    print(api_url) #You can use for debugging
 
     response = requests.get(api_url, headers=headers)
 
@@ -62,7 +64,7 @@ def translate(word, origin, dest):
                 current_match_and_translation_str = exact_match["text"] + ": "
 
                 for translation in exact_match["translations"]:
-                    current_match_and_translation_str += translation["text"] + " " #We append the translation to its result string
+                    current_match_and_translation_str += translation["text"] + ", " #We append the translation to its result string
 
                 results.append(current_match_and_translation_str) #We add the result string to the list of result strings
 
@@ -71,6 +73,8 @@ def translate(word, origin, dest):
 
         for match_and_translation in results: #We print the results we found
             print(match_and_translation)
+
+        print("\n")
 
         if(number_of_exact_matches_found > 0): #And offer a link for more info
             find_more_url = FIND_MORE_BASE_URL + origin + "-" + dest + "/search?source=auto&query=" + word
@@ -87,6 +91,9 @@ def translate(word, origin, dest):
 
     return results
 
+def get_word_example():
+    return null
+
 
 #Main program
 
@@ -98,10 +105,13 @@ parser = argparse.ArgumentParser(
         description="Translate a word from one language to another using the Linguee API",
         epilog="Supported languages: " + supported_langs_list_str) #We create an argument parser in order to work with arguments from terminal
 
-#Help for the user
+#Arguments and help for the user
 parser.add_argument("word", type=str, help="Word you want to translate")
 parser.add_argument("orig", type=str, help="Language of origin")
 parser.add_argument("dest", type=str, help="Language of destination")
+
+#Available flags
+parser.add_argument("-e", "--examples", help="include an example of the word", action="store_true")
 
 #We take the user's arguments
 args = parser.parse_args()
@@ -112,6 +122,8 @@ dest_lang_code = get_language_two_letter_code(args.dest)
 
 if((origin_lang_code != None) & (dest_lang_code != None)): #If we found the 2-letter code for both langs
     #We call the Translate method with the arguments
-    translate(args.word, origin_lang_code, dest_lang_code)
+    get_word_translation(args.word, origin_lang_code, dest_lang_code)
+    if(args.examples):
+        print("Here would be our examples")
 else:
     print("Oops! Seems like you added invalid languages! Check supported languages using --help")
